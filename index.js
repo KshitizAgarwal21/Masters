@@ -11,12 +11,13 @@ app.listen(PORT, (err) => {
     if (err) console.log(err);
     console.log("Server started successfully at port " + PORT);
 });
+//Connecting to MongoDB on cloud
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) console.log(err);
     console.log("Connected to database");
 });
 
-//API to get all categories in database
+//API to get all categories from database
 app.get('/getcategories', async (req, res) => {
     var Categories = []
     try {
@@ -36,7 +37,7 @@ app.get('/getcategories', async (req, res) => {
         res.status(500).send({ msg: "Bad Request" });
     }
 })
-//API to get all subcategories for a given Category in database
+//API to get all subcategories for a given Category from database
 app.post('/getsubcategories', async (req, res) => {
     var Subcategories = [];
     try {
@@ -54,7 +55,7 @@ app.post('/getsubcategories', async (req, res) => {
         res.status(500).send({ msg: "Bad request" });
     }
 })
-//API to get all products for a given category in database
+//API to get all products for a given category from database
 app.post('/getproductsbycategory', async (req, res) => {
     var Products = [];
     try {
@@ -75,7 +76,7 @@ app.post('/getproductsbycategory', async (req, res) => {
         res.status(500).send({ msg: "Bad request" });
     }
 })
-//API to get all products for a given subcategory in database
+//API to get all products for a given subcategory from database
 app.post('/getproductsbysubcategory', async (req, res) => {
     try {
         const products = await PRODUCTS_SCHEMA.findOne({ "Items.Subcategory": req.body.subcategory })
